@@ -5,6 +5,12 @@ const register = async (req, res) => {
 
     const {email, password, confirm_password, name, balance} = req.body;
 
+    const getDuplicateEmail = await usersModel.findOne({
+        email:email
+    });
+
+    if(getDuplicateEmail) throw `${email} already exists!`
+
     await usersModel.create({
         name: name,
         email :email,

@@ -13,8 +13,6 @@ const {email, password} = req.body;
 const getUser = await usersModel.findOne({
     email:email
 })
-    console.log(getUser);
-
     if(!getUser) throw "This email does'nt exist in the system!";
 
     const comparePassword = await bcrypt.compare(password, getUser.password) // trying to compare the password to the hashed password.

@@ -14,6 +14,7 @@ mongoose.connect(process.env.mongo_connection, {}).then(() => {
             console.log("Mongo connection failed");
         });
 
+require("./models/users.model")
 app.use(express.json());
 app.use(errorHandler);
 

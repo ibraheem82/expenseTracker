@@ -26,7 +26,7 @@ const getUser = await usersModel.findOne({
         _id: getUser._id,
         name:getUser.name
     }, 
-    "this-is-a-secret-key"
+   process.env.jwt_salt
 )
 
     res.status(200).json({

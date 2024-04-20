@@ -12,8 +12,8 @@ const register = async (req, res) => {
         balance: balance,
     });
 
-    res.status(200).json({
-        status: "User registered success",
+    res.status(201).json({
+        status: "User registered successfully!",
     });
 }
 

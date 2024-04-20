@@ -18,6 +18,7 @@ mongoose.connect(process.env.mongo_connection, {}).then(() => {
 require("./models/users.model")
 app.use(express.json());
 
+// ** Routes...
 app.use("/api/users", userRoutes)
 
 

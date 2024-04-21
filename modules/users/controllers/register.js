@@ -42,7 +42,7 @@ const accessToken = jwtManager(createdUser);
 
 
 var transporter = nodemailer.createTransport({
-    host: "smtp-relay.brevo.com",
+    host: process.env.mail_host,
     port: process.env.mail_port,
     auth: {
       user: process.env.mail_email,
@@ -68,6 +68,7 @@ var transporter = nodemailer.createTransport({
           <tr>
             <td style="background-color: #f7f7f7; padding: 20px; text-align: center;">
               <h1 style="color: #333333;">Welcome to Expense By Astro 🌏</h1>
+              <b> Hi ${createdUser.name}</b>
               <p style="color: #666666; font-size: 16px;">We hope you can manage your expenses easily from our platform.</p>
             </td>
           </tr>

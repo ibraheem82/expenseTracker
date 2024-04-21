@@ -6,7 +6,7 @@ const userDashboard = async (req, res) => {
     const getUser = await usersModel.findOne({
         _id : req.user._id, // getting the user by the request that have been attached to them. still getting the user by thier id, to get thier actual data.
         
-    }).select("-password -name");// what you are excluding.
+    }).select("-password");// what you are excluding.
     // OR 
     // .select("name balance email"); // what we want to display in the dashboard.
     // Get current hour

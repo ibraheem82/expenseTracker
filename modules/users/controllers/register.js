@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const jsonwebtoken = require("jsonwebtoken");
 
 const register = async (req, res) => {
     const usersModel = mongoose.model("users");
@@ -22,15 +23,31 @@ const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 15) // to make the password very secure.
 
-    await usersModel.create({
-        name: name,
-        email :email,
-        password: hashedPassword,
-        balance: balance,
-    });
+    // await usersModel.create({
+    //     name: name,
+    //     email :email,
+    //     password: hashedPassword,
+    //     balance: balance,
+    // });
+
+    const createdUser = await usersModel.create({
+            name: name,
+            email :email,
+            password: hashedPassword,
+            balance: balance,
+        });
+
+    const accessToken = await jsonwebtoken.sign({ // sign function to create a JSON Web Token (JWT).
+        //This is a JavaScript object that contains the data you want to embed within the JWT. Here
+        _id: createdUser._id,
+        name: createdUser.name
+    }, 
+   process.env.jwt_salt
+)
 
     res.status(201).json({
         status: "User registered successfully!",
+        accessToken : accessToken
     });
 }
 

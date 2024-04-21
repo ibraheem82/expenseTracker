@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwtManager = require("../../../managers/jwtManager");
 const jsonwebtoken = require("jsonwebtoken");
+const nodemailer = require('nodemailer');
 const register = async (req, res) => {
     const usersModel = mongoose.model("users");
 
@@ -37,7 +38,54 @@ const register = async (req, res) => {
             balance: balance,
         });
 
-        const accessToken = jwtManager(createdUser);
+const accessToken = jwtManager(createdUser);
+
+
+var transporter = nodemailer.createTransport({
+    host: "smtp-relay.brevo.com",
+    port: 587,
+    auth: {
+      user: "ibraheemomikunle82@gmail.com",
+      pass: "KSIpmHWf82C4cLDy"
+    }
+  });
+
+  const mailOptions = {
+    to: createdUser.email,
+    from: "astro@buld.com",
+    subject: "Welcome to Expense tracker",
+    html: `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to Expense Tracker</title>
+      </head>
+      <body style="font-family: Arial, sans-serif;">
+  
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+          <tr>
+            <td style="background-color: #f7f7f7; padding: 20px; text-align: center;">
+              <h1 style="color: #333333;">Welcome to Expense By Astro 🌏</h1>
+              <p style="color: #666666; font-size: 16px;">We hope you can manage your expenses easily from our platform.</p>
+            </td>
+          </tr>
+        </table>
+  
+      </body>
+      </html>
+    `
+  };
+  
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error occurred while sending email:', error);
+    } else {
+      console.log('Email sent:', info.response);
+    }
+  });
+  
 
     res.status(201).json({
         status: "User registered successfully!",

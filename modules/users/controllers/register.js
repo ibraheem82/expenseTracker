@@ -43,10 +43,10 @@ const accessToken = jwtManager(createdUser);
 
 var transporter = nodemailer.createTransport({
     host: "smtp-relay.brevo.com",
-    port: 587,
+    port: process.env.mail_port,
     auth: {
-      user: "ibraheemomikunle82@gmail.com",
-      pass: "KSIpmHWf82C4cLDy"
+      user: process.env.mail_email,
+      pass: process.env.mail_pass
     }
   });
 

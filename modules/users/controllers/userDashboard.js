@@ -27,7 +27,6 @@ const userDashboard = async (req, res) => {
         greeting = "Good evening";
     }
 
-
     res.status(200).json({
         status: "success",
         message: `${greeting}  ${getUser.name} 👋`,

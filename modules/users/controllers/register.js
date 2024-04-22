@@ -41,7 +41,7 @@ const register = async (req, res) => {
 const accessToken = jwtManager(createdUser);
 
 
-var transporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport({
     host: process.env.mail_host,
     port: process.env.mail_port,
     auth: {

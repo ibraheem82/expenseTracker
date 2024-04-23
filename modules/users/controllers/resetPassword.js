@@ -41,7 +41,7 @@ const resetPassword = async (req, res) => {
     }
 )
 
-await emailManager(email, "Password reseted successfully", "<h1>Password reset successfully, <small>If you have not done that, please contact us! </small>.</h1>")
+await emailManager(email, "Password reset successfully", "<h1>Password reset successfully, <small>If you have not done that, please contact us! </small>.</h1>")
 
 
     res.status(200).json({

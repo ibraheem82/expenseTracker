@@ -31,7 +31,8 @@ const resetPassword = async (req, res) => {
         email: email,
     },
     {  
-        password: hashedPassword
+        password: hashedPassword,
+        reset_code: ""
     },
 
     {

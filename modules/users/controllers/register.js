@@ -88,10 +88,7 @@ const register = async (req, res) => {
       </table>
     </body>
     </html>
-    `,
-
-   
-    
+    ` 
       )
 
 

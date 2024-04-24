@@ -10,7 +10,7 @@ const deleteTransaction = async(req, res) => {
     if(!validator.isMongoId(transaction_id.toString())) throw "Please provide a valid id";
 
     const getTransaction = await transactionsModel.findOne({
-        _id:transaction_id
+        _id:transaction_id // finding the transaction by it id.
     });
 
     if(!getTransaction) throw "Transaction not found.";

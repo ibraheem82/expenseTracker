@@ -26,10 +26,7 @@ require("./models/transactions.model");
 app.use(express.json());
 
 // ** Routes...
-app.use("/api/users", userRoutes);
-app.use("/api/transactions", transactionRoutes);
 
-// 
 const options = {
     failOnErrors: true, // Whether or not to throw when parsing errors. Defaults to false.
     definition: {
@@ -57,6 +54,11 @@ app.use(
     swaggerUi.serve,
     swaggerUi.setup(spacs)
 )
+app.use("/api/users", userRoutes);
+app.use("/api/transactions", transactionRoutes);
+
+// 
+
 
 // app.all("*", (req, res, next) => {
 

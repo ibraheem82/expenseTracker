@@ -36,7 +36,7 @@ const options = {
       openapi: '3.0.0',
       servers:[
         {
-            url: "https://expensetracker-znrn.onrender.com"
+            url: "https://expensetracker-znrn.onrender.com/"
         }
       ],
       info: {

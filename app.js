@@ -1,10 +1,7 @@
-require('express-async-errors');
-
 const express = require("express");
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-
-const cors = require("cors")
+const cors = require("cors");
 const errorHandler = require("./handlers/errorHandler");
 const mongoose = require("mongoose");
 const userRoutes = require('./modules/users/users.routes');
@@ -29,48 +26,32 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionRoutes);
 
-// 
+// Swagger setup
 const options = {
-    failOnErrors: true, // Whether or not to throw when parsing errors. Defaults to false.
     definition: {
-      openapi: '3.0.0',
-      servers:[
-        {
-            url: "https://expensetracker-znrn.onrender.com/"
-        }
-      ],
-      info: {
-        title: 'Hello World',
-        version: '1.0.0',
-      },
+        openapi: '3.0.0',
+        servers:[
+            {
+                url: "https://expensetracker-znrn.onrender.com/"
+            }
+        ],
+        info: {
+            title: 'Hello World',
+            version: '1.0.0',
+        },
     },
     apis: [
         './modules/users/users.routes.js',
         './modules/transactions/transactions.routes.js',
     ],
-  };
+};
 
-const spacs = swaggerJsdoc(options)
+const swaggerSpec = swaggerJsdoc(options);
 
-app.all(
-    "api/docs",
-    swaggerUi.serve,
-    swaggerUi.setup(spacs)
-)
-
-// app.all("*", (req, res, next) => {
-
-//     res.status(404).json({
-//         status: "failed",
-//         message: `404 Not Found: ${req.originalUrl}`
-//     })
-// });
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(errorHandler);
-
-
 
 app.listen(8000, () => {
     console.log("Server started ...");
 });
-

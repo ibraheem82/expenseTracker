@@ -58,13 +58,13 @@ app.use(
     swaggerUi.setup(spacs)
 )
 
-app.all("*", (req, res, next) => {
+// app.all("*", (req, res, next) => {
 
-    res.status(404).json({
-        status: "failed",
-        message: `404 Not Found: ${req.originalUrl}`
-    })
-});
+//     res.status(404).json({
+//         status: "failed",
+//         message: `404 Not Found: ${req.originalUrl}`
+//     })
+// });
 
 app.use(errorHandler);
 
